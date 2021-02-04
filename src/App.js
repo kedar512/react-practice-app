@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import {person as Person} from './Person/Person';
-import ValidationComponent from './ValidationComponent/ValidationComponent';
-import CharComponent from './CharComponent/CharComponent';
+//import ValidationComponent from './ValidationComponent/ValidationComponent';
+//import CharComponent from './CharComponent/CharComponent';
 
 class App extends Component {
 
@@ -60,8 +60,17 @@ class App extends Component {
 
   render() {
 
+    const styles = {
+      backgroundColor: 'green',
+      color: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    }
+
     let persons = null;
-    let chars = null;
+    //let chars = null;
 
     if (this.state.showPersons) {
       persons = (
@@ -79,23 +88,22 @@ class App extends Component {
         })}
         </div>
       );
+
+      styles.backgroundColor = 'red';
     }
 
-    if (this.state.textInput.length > 0) {
+    /* if (this.state.textInput.length > 0) {
       chars = this.state.textInput.split('').map( (value, index) => {
         return (
           <CharComponent clicked={ () =>this.removeChar(value) } key={`${index}${value}`} charValue={value} />
         );
       })
-    }
+    } */
 
     return (
       <div className="App">
         <h1>My react app</h1>
-        <input value={this.state.textInput} type='text' onChange={this.inputChangeHandler} />
-        <ValidationComponent textInput={this.state.textInput} />
-        {chars}
-        <button onClick={this.togglePersonsHandler}>Toggle Names</button>
+        <button style={styles} onClick={this.togglePersonsHandler}>Toggle Names</button>
         {persons}
       </div>
     );
