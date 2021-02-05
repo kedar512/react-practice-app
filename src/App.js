@@ -1,9 +1,24 @@
 import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
-import {person as Person} from './Person/Person';
+import styled from 'styled-components';
+import Person from './Person/Person';
 //import ValidationComponent from './ValidationComponent/ValidationComponent';
 //import CharComponent from './CharComponent/CharComponent';
+
+const StyledButton = styled.button`
+  background-color: ${ props => props.alt ? 'red' : 'green'};
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${ props => props.alt ? 'salmon' : 'lightgreen'};
+    color: black;
+  }
+`;
 
 class App extends Component {
 
@@ -90,6 +105,20 @@ class App extends Component {
       );
 
       styles.backgroundColor = 'red';
+      styles[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
+    }
+
+    let classes = [];
+
+    if (this.state.persons.length >= 3) {
+      classes.push('bold');
+    }
+
+    if (this.state.persons.length <= 1) {
+      classes.push('red');
     }
 
     /* if (this.state.textInput.length > 0) {
@@ -103,7 +132,12 @@ class App extends Component {
     return (
       <div className="App">
         <h1>My react app</h1>
-        <button style={styles} onClick={this.togglePersonsHandler}>Toggle Names</button>
+        <p className={classes.join(' ') } >Testing dynamically applying classes</p>
+        <StyledButton
+          alt={this.state.showPersons ? 1 : 0}
+          onClick={this.togglePersonsHandler}>
+          Toggle Names
+        </StyledButton>
         {persons}
       </div>
     );
