@@ -1,35 +1,52 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import classes from './Cockpit.css';
 
 const cockpit = props => {
 
-    let assignedClasses = [];
-    let btnClass = [''];
+  useEffect(() => {
+    console.log('[Cockpit.js] useEffect');
 
-    if (props.showPersons) {
-        btnClass = classes.Red;
+    return () => {
+      //use this return function to do clean up work like removing event listeners etc.
+      console.log('[Cockpit.js] clean up work');
     }
+  }, []); // Use empty array if you want some code to run only once when component is loaded
 
-    if (props.persons.length >= 3) {
-      assignedClasses.push(classes.bold);
+  useEffect( () => {
+    console.log('[Cockpit.js] 2nd useEffect');
+
+    return () => {
+      console.log('[Cockpit.js] 2nd useEffect clean up work');
     }
+  }, [props.persons]);
 
-    if (props.persons.length <= 1) {
-      assignedClasses.push(classes.red);
-    }
+  let assignedClasses = [];
+  let btnClass = [''];
 
-    return (
-        <div className={classes.Cockpit}>
-            <h1>My react app</h1>
-            <p className={assignedClasses.join(' ') } >Testing dynamically applying classes</p>
-            <button
-            className={btnClass}
-            onClick={props.clicked}>
-            Toggle Names
+  if (props.showPersons) {
+    btnClass = classes.Red;
+  }
+
+  if (props.persons.length >= 3) {
+    assignedClasses.push(classes.bold);
+  }
+
+  if (props.persons.length <= 1) {
+    assignedClasses.push(classes.red);
+  }
+
+  return (
+    <div className={classes.Cockpit}>
+      <h1>My react app</h1>
+      <p className={assignedClasses.join(' ')} >Testing dynamically applying classes</p>
+      <button
+        className={btnClass}
+        onClick={props.clicked}>
+        Toggle Names
             </button>
-        </div>
-    );
+    </div>
+  );
 }
 
 export default cockpit;
