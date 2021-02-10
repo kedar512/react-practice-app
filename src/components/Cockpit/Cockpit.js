@@ -7,8 +7,12 @@ const cockpit = props => {
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
 
+    const timer = setTimeout( () => {
+      alert('Saving data...');
+    } , 1000)
     return () => {
-      //use this return function to do clean up work like removing event listeners etc.
+      //use this return function to do clean up work like removing event listeners, timers, intervals etc.
+      clearTimeout(timer);
       console.log('[Cockpit.js] clean up work');
     }
   }, []); // Use empty array if you want some code to run only once when component is loaded
