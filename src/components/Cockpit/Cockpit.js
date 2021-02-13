@@ -1,13 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
+import AuthContext from '../../context/auth-context';
 
 import classes from './Cockpit.css';
 
 const cockpit = props => {
 
   const buttonRef = useRef(null);
+  const authContext = useContext(AuthContext);
 
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
+    console.log('[Cockpit.js] Auth context authenticated: ', authContext.authenticated);
 
     /* const timer = setTimeout( () => {
       alert('Saving data...');
@@ -55,6 +58,9 @@ const cockpit = props => {
         onClick={props.clicked}>
         Toggle Names
       </button>
+        <button
+          onClick={authContext.login}
+        >Login</button>
     </div>
   );
 }
