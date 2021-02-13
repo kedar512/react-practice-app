@@ -1,18 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import classes from './Cockpit.css';
 
 const cockpit = props => {
 
+  const buttonRef = useRef(null);
+
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
 
-    const timer = setTimeout( () => {
+    /* const timer = setTimeout( () => {
       alert('Saving data...');
-    } , 1000)
+    } , 1000); */
+
+    buttonRef.current.click();
+
     return () => {
       //use this return function to do clean up work like removing event listeners, timers, intervals etc.
-      clearTimeout(timer);
+      //clearTimeout(timer);
       console.log('[Cockpit.js] clean up work');
     }
   }, []); // Use empty array if you want some code to run only once when component is loaded
@@ -45,10 +50,11 @@ const cockpit = props => {
       <h1>My react app</h1>
       <p className={assignedClasses.join(' ')} >Testing dynamically applying classes</p>
       <button
+        ref={buttonRef}
         className={btnClass}
         onClick={props.clicked}>
         Toggle Names
-            </button>
+      </button>
     </div>
   );
 }
